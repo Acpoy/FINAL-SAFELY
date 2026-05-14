@@ -1,0 +1,22 @@
+{
+  "name": "SAFELY - Keselamatan Jalan Raya",
+  "short_name": "SAFELY",
+  "description": "Platform pembelajaran keselamatan jalan raya untuk kanak-kanak.",
+  "start_url": "./index.html",
+  "display": "standalone",
+  "background_color": "#FFF3E0",
+  "theme_color": "#FF9800",
+  "orientation": "portrait-primary",
+  "icons": [
+    {
+      "src": "assets/icons/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "assets/icons/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ]
+}

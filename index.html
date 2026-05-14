@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+<html lang="ms">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SAFELY</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&family=Fredoka+One&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <!-- PWA -->
+    <link rel="manifest" href="manifest.json">
+    <meta name="theme-color" content="#FF9800">
+</head>
+
+<body>
+
+    <!-- GENDER SECTION -->
+    <section id="gender-section" class="section aktif">
+        <div class="kotak fade-in">
+            <div class="logo-wrap">
+                <h1 class="logo-text">SAFELY</h1>
+            </div>
+            <p class="subtitle">Pilih watak anda untuk memulakan pembelajaran.</p>
+            <div class="gender-container">
+                <div class="gender-card" onclick="pilihGender('boy')">
+                    <div class="gender-img-wrap">
+                        <img src="assets/characters/boy_welcome.png" class="gender-image" alt="Boy">
+                    </div>
+                    <span class="gender-label">LELAKI</span>
+                </div>
+                <div class="gender-card" onclick="pilihGender('girl')">
+                    <div class="gender-img-wrap">
+                        <img src="assets/characters/girl_welcome.png" class="gender-image" alt="Girl">
+                    </div>
+                    <span class="gender-label">PEREMPUAN</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- HOME SECTION -->
+    <section id="home-section" class="section">
+        <div class="kotak fade-in">
+            <button id="sound-button" class="sound-button" onclick="toggleSound()">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M3 9v6h4l5 5V4L7 9H3zm13.5 3c0-1.77-1.02-3.29-2.5-4.03v8.05c1.48-.73 2.5-2.25 2.5-4.02z"/></svg>
+                <span id="sound-label">Bunyi</span>
+            </button>
+
+            <div class="logo-wrap">
+                <h1 class="logo-text">SAFELY</h1>
+            </div>
+            <p class="subtitle">Platform pembelajaran keselamatan jalan raya untuk kanak-kanak.</p>
+
+            <div class="menu">
+                <button class="btn btn-primary" onclick="mulaKuizBaru()">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
+                    Mula Kuiz
+                </button>
+                <button class="btn btn-art" onclick="bukaLukisan()">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 3c-4.97 0-9 4.03-9 9s4.03 9 9 9c.83 0 1.5-.67 1.5-1.5 0-.39-.15-.74-.39-1.01-.23-.26-.38-.61-.38-.99 0-.83.67-1.5 1.5-1.5H16c2.76 0 5-2.24 5-5 0-4.42-4.03-8-9-8zm-5.5 9c-.83 0-1.5-.67-1.5-1.5S5.67 9 6.5 9 8 9.67 8 10.5 7.33 12 6.5 12zm3-4C8.67 8 8 7.33 8 6.5S8.67 5 9.5 5s1.5.67 1.5 1.5S10.33 8 9.5 8zm5 0c-.83 0-1.5-.67-1.5-1.5S13.67 5 14.5 5s1.5.67 1.5 1.5S15.33 8 14.5 8zm3 4c-.83 0-1.5-.67-1.5-1.5S16.67 9 17.5 9s1.5.67 1.5 1.5-.67 1.5-1.5 1.5z"/></svg>
+                    Lukisan
+                </button>
+                <button class="btn btn-video" onclick="bukaVideo()">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M10 16.5l6-4.5-6-4.5v9zM12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8z"/></svg>
+                    Video Pembelajaran
+                </button>
+                <div class="btn-row">
+                    <button class="btn btn-outline" onclick="bukaPanduan()">Panduan</button>
+                    <button class="btn btn-outline" onclick="bukaInfo()">Info</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- QUIZ SECTION -->
+    <section id="quiz-section" class="section">
+        <div class="kotak kotak-quiz fade-in">
+            <div class="quiz-topbar">
+                <div class="quiz-topbar-row">
+                    <span id="nombor-soalan" class="badge-soalan">Soalan 1 / 15</span>
+                    <div style="display:flex;gap:8px;align-items:center;">
+                        <button class="btn-keluar-kuiz" onclick="sahKeluar()" title="Kembali ke Laman Utama">&#10005;</button>
+                    </div>
+                </div>
+                <div class="kotak-progress">
+                    <div id="progress-bar"></div>
+                </div>
+            </div>
+
+            <div class="situasi-wrap">
+                <img id="situasi-img" src="" alt="Situasi" class="situasi-img">
+            </div>
+
+            <h2 id="soalan" class="soalan-teks">Soalan akan muncul di sini</h2>
+
+            <div class="jawapan">
+                <button class="pilihan" onclick="semakJawapan(0)">
+                    <span class="pilihan-label">A</span>
+                    <span class="pilihan-teks">Jawapan 1</span>
+                </button>
+                <button class="pilihan" onclick="semakJawapan(1)">
+                    <span class="pilihan-label">B</span>
+                    <span class="pilihan-teks">Jawapan 2</span>
+                </button>
+                <button class="pilihan" onclick="semakJawapan(2)">
+                    <span class="pilihan-label">C</span>
+                    <span class="pilihan-teks">Jawapan 3</span>
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- RESULT SECTION -->
+    <section id="result-section" class="section">
+        <div class="kotak fade-in">
+            <h1>Kuiz Selesai</h1>
+            <div class="result-ring-wrap">
+                <svg class="result-ring" viewBox="0 0 120 120">
+                    <circle class="ring-bg" cx="60" cy="60" r="50"/>
+                    <circle id="ring-fill" class="ring-fill" cx="60" cy="60" r="50"/>
+                </svg>
+                <div class="result-center-text">
+                    <span id="markah-akhir" class="result-peratus">100%</span>
+                    <span class="result-sub">markah</span>
+                </div>
+            </div>
+            <p id="mesej" class="mesej-result"></p>
+            <div id="result-stats" class="result-stats"></div>
+            <div class="menu">
+                <button class="btn btn-primary" onclick="mainSemula()">Cuba Lagi</button>
+                <button class="btn btn-outline" onclick="kembaliHome()">Laman Utama</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- PANDUAN SECTION -->
+    <section id="panduan-section" class="section">
+        <div class="kotak fade-in">
+            <h1>Panduan</h1>
+            <div class="panduan-list">
+                <div class="panduan-item">
+                    <div class="panduan-num">1</div>
+                    <p>Baca soalan dengan teliti sebelum memilih jawapan.</p>
+                </div>
+                <div class="panduan-item">
+                    <div class="panduan-num">2</div>
+                    <p>Pilih jawapan yang betul daripada tiga pilihan yang diberikan.</p>
+                </div>
+                <div class="panduan-item">
+                    <div class="panduan-num">3</div>
+                    <p>Jika jawapan salah, anda boleh ulang atau terus ke soalan berikutnya.</p>
+                </div>
+                <div class="panduan-item">
+                    <div class="panduan-num">4</div>
+                    <p>Markah tertinggi dan rekod kuiz disimpan secara automatik.</p>
+                </div>
+                <div class="panduan-item">
+                    <div class="panduan-num">5</div>
+                    <p>Gunakan bahagian Lukisan untuk melukis secara bebas dan simpan sebagai gambar PNG.</p>
+                </div>
+            </div>
+            <div class="menu">
+                <button class="btn btn-primary" onclick="mulaKuizBaru()">Mula Kuiz</button>
+                <button class="btn btn-outline" onclick="kembaliHome()">Laman Utama</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- INFO SECTION -->
+    <section id="info-section" class="section">
+        <div class="kotak fade-in">
+            <h1>Tentang SAFELY</h1>
+            <p class="subtitle" style="text-align:center; margin-bottom:24px;">SAFELY ialah platform pembelajaran interaktif yang membantu kanak-kanak memahami keselamatan jalan raya dengan cara yang mudah dan menyeronokkan.</p>
+            <div class="info-chips">
+                <span class="chip">15 Soalan</span>
+                <span class="chip">Pelbagai Situasi</span>
+                <span class="chip">Rekod Tersimpan</span>
+                <span class="chip">Papan Lukisan</span>
+            </div>
+            <div class="menu">
+                <button class="btn btn-outline" onclick="kembaliHome()">Laman Utama</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- LUKISAN SECTION -->
+    <section id="lukisan-section" class="section">
+        <div class="kotak kotak-lukis fade-in">
+            <h1>Lukisan Bebas</h1>
+
+            <div class="lukis-toolbar">
+                <div class="toolbar-group">
+                    <label class="toolbar-label">Warna</label>
+                    <div class="warna-grid">
+                        <button class="warna-pilihan aktif-warna" style="background:#1a1a2e;" onclick="pilihWarna('#1a1a2e', this)" aria-label="Hitam"></button>
+                        <button class="warna-pilihan" style="background:#e63946;" onclick="pilihWarna('#e63946', this)" aria-label="Merah"></button>
+                        <button class="warna-pilihan" style="background:#f4a261;" onclick="pilihWarna('#f4a261', this)" aria-label="Oren"></button>
+                        <button class="warna-pilihan" style="background:#f7b731;" onclick="pilihWarna('#f7b731', this)" aria-label="Kuning"></button>
+                        <button class="warna-pilihan" style="background:#2a9d8f;" onclick="pilihWarna('#2a9d8f', this)" aria-label="Hijau"></button>
+                        <button class="warna-pilihan" style="background:#457b9d;" onclick="pilihWarna('#457b9d', this)" aria-label="Biru"></button>
+                        <button class="warna-pilihan" style="background:#9b5de5;" onclick="pilihWarna('#9b5de5', this)" aria-label="Ungu"></button>
+                        <button class="warna-pilihan" style="background:#f72585;" onclick="pilihWarna('#f72585', this)" aria-label="Pink"></button>
+                        <button class="warna-pilihan warna-putih" style="background:#ffffff;" onclick="pilihWarna('#ffffff', this)" aria-label="Putih"></button>
+                    </div>
+                    <input type="color" id="custom-color" value="#1a1a2e" oninput="pilihWarnaCustom(this.value)" title="Warna lain">
+                </div>
+
+                <div class="toolbar-group">
+                    <label class="toolbar-label">Saiz: <span id="label-saiz">8px</span></label>
+                    <input type="range" id="saiz-berus" min="2" max="50" value="8" oninput="kemaskiniSaiz(this.value)">
+                    <div class="preview-berus">
+                        <div id="preview-bulat"></div>
+                    </div>
+                </div>
+
+                <div class="toolbar-group">
+                    <label class="toolbar-label">Alat</label>
+                    <div class="alat-grid">
+                        <button class="alat-btn aktif-alat" id="btn-pensel" onclick="pilihAlat('pensel', this)">Pensel</button>
+                        <button class="alat-btn" id="btn-pemadam" onclick="pilihAlat('pemadam', this)">Pemadam</button>
+                    </div>
+                </div>
+
+                <div class="toolbar-group">
+                    <label class="toolbar-label">Tindakan</label>
+                    <div class="alat-grid">
+                        <button class="alat-btn" onclick="undoLukis()">Undo</button>
+                        <button class="alat-btn alat-danger" onclick="clearKanvas()">Padam Semua</button>
+                    </div>
+                </div>
+
+                <!-- MUAT NAIK GAMBAR -->
+                <div class="toolbar-group">
+                    <label class="toolbar-label">Muat Naik Gambar</label>
+                    <div class="alat-grid">
+                        <label class="alat-btn muat-naik-label" for="input-gambar">
+                            Pilih Gambar
+                        </label>
+                        <input type="file" id="input-gambar" accept="image/*" style="display:none;" onchange="muatNaikGambar(this)">
+                    </div>
+                </div>
+            </div>
+
+            <div class="canvas-wrapper">
+                <canvas id="kanvas-lukis"></canvas>
+            </div>
+
+            <div class="lukis-actions">
+                <button class="btn btn-save" onclick="simpanLukisan()">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M19 12v7H5v-7H3v7c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2v-7h-2zm-6 .67l2.59-2.58L17 11.5l-5 5-5-5 1.41-1.41L11 12.67V3h2v9.67z"/></svg>
+                    Simpan sebagai PNG
+                </button>
+                <button class="btn btn-outline" onclick="kembaliHome()">Laman Utama</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- VIDEO SECTION -->
+    <section id="video-section" class="section">
+        <div class="kotak fade-in">
+            <h1>Video Pembelajaran</h1>
+            <p class="subtitle" style="text-align:center; margin-bottom:20px;">Tonton video menarik berkaitan keselamatan jalan raya untuk kanak-kanak.</p>
+
+            <div class="menu">
+                <a class="btn btn-video-link" href="https://youtu.be/6sJuzokFwfg?list=RD6sJuzokFwfg" target="_blank" rel="noopener noreferrer">
+                    🎵 Lagu Keselamatan Jalan Raya
+                </a>
+                <a class="btn btn-video-link" href="https://youtu.be/FybHOGA7LjM" target="_blank" rel="noopener noreferrer">
+                    🚸 Cara Melintas Jalan
+                </a>
+                <a class="btn btn-video-link" href="https://youtu.be/nSL31E6Jtis" target="_blank" rel="noopener noreferrer">
+                    🚦 Lampu Isyarat untuk Kanak-Kanak
+                </a>
+                <button class="btn btn-outline" onclick="kembaliHome()">Laman Utama</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- POPUP BETUL -->
+    <div id="popup-betul" class="popup">
+        <div class="popup-kandungan">
+            <div class="popup-icon-wrap green-bg">
+                <svg width="32" height="32" viewBox="0 0 24 24" fill="white"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41L9 16.17z"/></svg>
+            </div>
+            <img id="popup-betul-image" src="assets/characters/girl_trophy.png" class="popup-character" alt="Tahniah">
+            <h2>Tahniah!</h2>
+            <p>Jawapan anda betul.</p>
+            <p id="popup-betul-penerangan" class="popup-penerangan popup-penerangan-betul"></p>
+            <div class="popup-button">
+                <button class="btn btn-primary" id="btn-soalan-seterusnya-betul" onclick="tutupPopupBetul()">Soalan Seterusnya</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- POPUP SALAH -->
+    <div id="popup-salah" class="popup">
+        <div class="popup-kandungan">
+            <div class="popup-icon-wrap red-bg">
+                <svg width="32" height="32" viewBox="0 0 24 24" fill="white"><path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+            </div>
+            <img id="popup-salah-image" src="assets/characters/girl_wrong.png" class="popup-character" alt="Salah">
+            <h2>Jawapan Salah</h2>
+            <p>Adakah anda ingin ulang soalan ini?</p>
+            <p id="popup-salah-penerangan" class="popup-penerangan popup-penerangan-salah"></p>
+            <div class="popup-button">
+                <button class="btn btn-primary" id="btn-soalan-seterusnya-salah" onclick="teruskanSoalan()">Soalan Seterusnya</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- POPUP JEDA -->
+    <div id="popup-jeda" class="popup" style="display:none;">
+        <div class="popup-kandungan">
+            <div class="popup-icon-wrap" style="background:linear-gradient(135deg,#FF9800,#F44336);">
+                <svg width="32" height="32" viewBox="0 0 24 24" fill="white"><path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/></svg>
+            </div>
+            <h2>Kuiz Dijeda</h2>
+            <div class="popup-button" style="margin-top:20px;">
+                <button class="btn btn-primary" onclick="sambungSemula()">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
+                    Sambung Semula
+                </button>
+                <button class="btn btn-outline" onclick="jedaKembaliHome()">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z"/></svg>
+                    Laman Utama
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
